@@ -1,6 +1,4 @@
 <select name="dropdown" (change)="onSelect($event.target.value)">
-  <option value="Computer Architecture" selected>Computer Architecture</option>
-  <option value="Java">Java</option>
-  <option value="Discrete Mathematics">Discrete Mathematics</option>
+  <option *ngFor="let item of list" [value]="item.value">{{item.label}}</option>
 </select>
 

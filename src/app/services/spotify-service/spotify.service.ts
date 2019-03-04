@@ -5,6 +5,8 @@ import {SpotifyConfig} from '../../app.config';
 import {Observable} from 'rxjs';
 import {RXBox} from 'rxbox';
 import {filter, map} from 'rxjs/operators';
+import {AlbumType} from '../../interfaces/album.interface';
+import {ApiService} from '../api/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class SpotifyService {
 
   static createAlbumObj(albumData) {
     return {
-      coverImages: albumData.images,
+      coverImage: albumData.images[0].url,
       name: albumData.name,
       releaseDate: albumData.release_date
     };
@@ -25,6 +27,7 @@ export class SpotifyService {
 
   constructor(
     private http: HttpClient,
+    private apiService: ApiService,
     private store: RXBox,
   ) {
   }
@@ -33,12 +36,11 @@ export class SpotifyService {
   login() {
     //  using proxy for 'https://accounts.spotify.com/api/token';
     const url = '/api/token';
-
     const body = 'grant_type=client_credentials';
     const headers = this.createLoginHeaders();
 
 
-    return this.http.post(url, body, {headers}).toPromise();
+    return this.apiService.post(url, body, headers).toPromise();
   }
 
 
@@ -53,20 +55,18 @@ export class SpotifyService {
   }
 
 
-  async loadAlbums() {
+  async loadAlbums(): Promise<AlbumType[]> {
     const headers = this.creatTokenHeader();
-    const res: any = await this.http.get(
-      'https://api.spotify.com/v1/artists/0du5cEVh5yTK9QJze8zA0C/albums?limit=20&offset=0',
-      {headers})
+    const url = 'https://api.spotify.com/v1/artists/0du5cEVh5yTK9QJze8zA0C/albums?limit=20&offset=0';
+
+    const res: any = await this.apiService.get(url, headers)
       .pipe(map((res: any) => res.items)).toPromise();
 
-    let albums = res.filter(item => {
+    return res.filter(item => {
       return item.album_type === 'album';
     }).map(album => {
       return SpotifyService.createAlbumObj(album);
     });
-
-    return albums;
   }
 
 

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SpotifyService} from './services/spotify-service/spotify.service';
 import {RXBox} from 'rxbox';
+import {AlbumType} from './interfaces/album.interface';
+import {DropdownListType} from './interfaces/dropdownList.interface';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +17,9 @@ export class AppComponent implements OnInit {
   ) {
   }
 
-  albumsData: any;
-  albumList: any;
+  albumsData: AlbumType[];
+  albumList: DropdownListType[];
+  currentAlbum: AlbumType;
 
 
   async ngOnInit() {
@@ -33,12 +36,18 @@ export class AppComponent implements OnInit {
 
     // get albums list
     this.albumsData = await this.spotifyService.loadAlbums();
-    this.albumList = this.albumsData.map((album) => album.name);
+    this.albumList = this.albumsData.map((album, index) => {
+      return {
+        label: album.name,
+        value: index
+      }
+    });
   }
 
 
-  changeAlbum(albumData) {
-    console.log(albumData);
+  changeAlbum(index) {
+    console.log(index);
+    this.currentAlbum = this.albumsData[index]
   }
 
 }

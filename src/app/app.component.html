@@ -3,9 +3,11 @@
   <app-dropdown-albums [list]="albumList" (currentAlbum)="changeAlbum($event)"></app-dropdown-albums>
 
   <br>
-  <div>
-    <div>Name</div>
-    <div>Image</div>
+  <br>
+  <div *ngIf="currentAlbum" class="albumDisplay">
+    <img [src]="currentAlbum.coverImage">
+    <h1>{{currentAlbum.name}}</h1>
+    <h4>Release Date: {{currentAlbum.releaseDate}}</h4>
   </div>
 </ng-container>
 

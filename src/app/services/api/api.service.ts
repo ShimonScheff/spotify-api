@@ -6,10 +6,16 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ApiService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {}
+
+
+  get(url, headers) {
+    return this.httpClient.get(url, {headers});
   }
 
-  get(url) {
-    return this.httpClient.get<any>(url, {observe: 'response'});
-    }
+
+  post(url, body, headers) {
+    return this.httpClient.post(url, body, {headers});
   }
+
+}
