@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
     private spotifyService: SpotifyService,
     private store: RXBox
   ) {
+    store.saveToLocalStorage = true;
+    store.saveToSessionStorage = true;
   }
 
   albumsData: AlbumType[];
@@ -23,6 +25,12 @@ export class AppComponent implements OnInit {
 
 
   async ngOnInit() {
+    // get current album if user refresh - https://www.npmjs.com/package/rxbox
+    console.log(this.store.getStoreFromLocalStorage());
+    if (this.store.getStoreFromLocalStorage() !== null) {
+      this.currentAlbum = this.store.getStoreFromLocalStorage()['currentAlbum'];
+    }
+
     // login to spotify
     const res: any = await this.spotifyService.login();
     // assign state of user keys
@@ -40,14 +48,16 @@ export class AppComponent implements OnInit {
       return {
         label: album.name,
         value: index
-      }
+      };
     });
   }
 
 
   changeAlbum(index) {
-    console.log(index);
-    this.currentAlbum = this.albumsData[index]
-  }
+    this.currentAlbum = this.albumsData[index];
+    this.store.assignState({
+      currentAlbum: this.currentAlbum
+    });
 
+  }
 }

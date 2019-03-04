@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {SpotifyConfig} from '../../app.config';
-import {Observable} from 'rxjs';
 import {RXBox} from 'rxbox';
-import {filter, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {AlbumType} from '../../interfaces/album.interface';
 import {ApiService} from '../api/api.service';
+import {getLoginUrl} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +34,7 @@ export class SpotifyService {
 
 
   login() {
-    //  using proxy for 'https://accounts.spotify.com/api/token';
-    const url = '/api/token';
+    const url = getLoginUrl();
     const body = 'grant_type=client_credentials';
     const headers = this.createLoginHeaders();
 
