@@ -1,9 +1,11 @@
+<ng-container *ngIf="albumList">
+  <h1>Bruno Mars Albums</h1>
+  <app-dropdown-albums [list]="albumList" (currentAlbum)="changeAlbum($event)"></app-dropdown-albums>
 
-<h1>Bruno Mars Albums</h1>
-<app-dropdown-albums></app-dropdown-albums>
+  <br>
+  <div>
+    <div>Name</div>
+    <div>Image</div>
+  </div>
+</ng-container>
 
-<br>
-<div>
-  <div>Name</div>
-  <div>Image</div>
-</div>

@@ -1,5 +1,5 @@
 {
-  "extends": "tslint:recommended",
+ /* "extends": "tslint:recommended",*/
   "rulesDirectory": [
     "codelyzer"
   ],
@@ -54,7 +54,7 @@
       true,
       "as-needed"
     ],
-    "object-literal-sort-keys": false,
+   // "object-literal-sort-keys": true,
     "ordered-imports": false,
     "quotemark": [
       true,
