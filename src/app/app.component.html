@@ -1,13 +1,24 @@
 <ng-container *ngIf="albumList">
-  <h1>Bruno Mars Albums</h1>
-  <app-dropdown-albums [list]="albumList" (currentAlbum)="changeAlbum($event)"></app-dropdown-albums>
-
-  <br>
-  <br>
-  <div *ngIf="currentAlbum" class="albumDisplay">
-    <img [src]="currentAlbum.coverImage">
-    <h1>{{currentAlbum.name}}</h1>
-    <h4>Release Date: {{currentAlbum.releaseDate}}</h4>
+  <div class="flexContainer">
+    <div class="sideNav">
+      <h1>Bruno Mars Albums</h1>
+      <app-dropdown-albums [list]="albumList" (currentAlbum)="changeAlbum($event)"></app-dropdown-albums>
+    </div>
+    <div class="albumDisplay">
+      <div *ngIf="currentAlbum" class="innerData">
+        <img [src]="currentAlbum.coverImage">
+        <h1>{{currentAlbum.name}}</h1>
+        <h4>Release Date: {{currentAlbum.releaseDate}}</h4>
+      </div>
+    </div>
   </div>
+
 </ng-container>
+
+<div *ngIf="!albumList" >
+  <div class = "centered">
+    <div class = "blob-1"></div>
+    <div class = "blob-2"></div>
+  </div>
+</div>
 

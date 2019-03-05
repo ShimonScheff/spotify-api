@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     // get current album if user refresh - https://www.npmjs.com/package/rxbox
-    console.log(this.store.getStoreFromLocalStorage());
     if (this.store.getStoreFromLocalStorage() !== null) {
       this.currentAlbum = this.store.getStoreFromLocalStorage()['currentAlbum'];
     }

@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+.flexContainer {
+  width: 100%;
+  display: flex;
+}
+
+.sideNav {
+  background-color: black;
+
+  flex:1;
+  max-width: 340px;
+  height: 100vh;
+}
+
+.albumDisplay {
+  background-color: #b7b7b7; background-image: linear-gradient(black, #343434);
+  flex:3;
+  height: 100vh;
+  img {
+    max-width: 640px;
+    width: 100%;
+  }
+  .innerData {
+    padding-top: 70px;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .flexContainer {
+   flex-direction: column;
+  }
+
+  .sideNav {
+    height: 100px;
+  }
+}
