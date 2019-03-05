@@ -8,6 +8,8 @@ Please Run `npm start` (not `ng serve`)  for a dev server. Navigate to `http://l
 
 `ng serve` might  not work because of cors issues.
 
+Also to login to spotify api, add to app.config.ts file  your Spotify App CLIENT_ID and CLIENT_SECRET
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
